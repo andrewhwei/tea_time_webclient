@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'dotenv-rails', :groups => [:development, :test]
 gem 'unirest'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'

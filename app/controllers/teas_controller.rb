@@ -1,7 +1,7 @@
 class TeasController < ApplicationController
 
   def index
-    @teas = Unirest.get("http://localhost:3000/api/v1/teas.json").body
+    @teas = Unirest.get("#{ENV['DOMAIN']}/teas.json").body
   end
 
   def new
@@ -9,11 +9,11 @@ class TeasController < ApplicationController
   end
 
   def show
-    @tea = Unirest.get("http://localhost:3000/api/v1/teas/#{params[:id]}.json").body
+    @tea = Unirest.get("#{ENV['DOMAIN']}/teas/#{params[:id]}.json").body
   end
 
   def create
-    Unirest.post("http://localhost:3000/api/v1/teas?name=#{params[:name]}&origin=#{params[:origin]}&weight=#{params[:weight]}&in_stock=#{params[:in_stock]}")
+    Unirest.post("#{ENV['DOMAIN']}/teas?name=#{params[:name]}&origin=#{params[:origin]}&weight=#{params[:weight]}&in_stock=#{params[:in_stock]}")
     redirect_to "/teas"
   end
 
