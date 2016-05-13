@@ -4,3 +4,5 @@
       <li><%= @tea["weight"] %></li>
       <li><%= @tea["in_stock"] %></li>
     </ul>
+
+    <%= link_to "Delete product", "/teas/#{@tea['id']}", method: :delete %>

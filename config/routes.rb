@@ -2,8 +2,11 @@ Rails.application.routes.draw do
 
   get 'teas', to: 'teas#index'
   get 'teas/new', to: 'teas#new'
+  get 'teas/:id/edit', to: 'teas#edit'
+  patch 'teas/:id', to: 'teas#update'
   get 'teas/:id', to: 'teas#show'
   post 'teas', to: 'teas#create'
+  delete 'teas/:id', to: 'teas#destroy'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
