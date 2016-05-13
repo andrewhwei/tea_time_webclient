@@ -1,0 +1,19 @@
+<table>
+
+<tr>
+  <th>Name</th>
+  <th>Origin</th>
+  <th>Ounces available</th>
+  <th>In Stock</th>
+</tr>
+
+<% @teas.each do |tea| %>
+  <tr>
+    <td><%= tea["name"] %></td>
+    <td><%= tea["origin"] %></td>
+    <td><%= tea["weight"] %></td>
+    <td><%= tea["in_stock"] %></td>
+  </tr>
+<% end %>
+
+</table>

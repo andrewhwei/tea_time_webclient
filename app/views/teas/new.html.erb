@@ -1,0 +1,22 @@
+<%= form_tag '/teas', method: :post do %>
+
+  <div>
+    <%= label_tag :name %>
+    <%= text_field_tag :name %>
+  </div>
+  <div>
+    <%= label_tag :origin %>
+    <%= text_field_tag :origin %>
+  </div>
+  <div>
+    <%= label_tag :weight %>
+    <%= text_field_tag :weight %>
+  </div>
+  <div>
+    <%= label_tag :in_stock %>
+    <%= text_field_tag :in_stock %>
+  </div>
+
+  <%= submit_tag "Add tea product" %>
+
+<% end %>
