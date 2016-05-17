@@ -1,13 +1,11 @@
 class TeasController < ApplicationController
 
   def index
-    array_of_tea_hashes = Unirest.get("#{ENV['DOMAIN']}teas.json").body
-    @teas = array_of_tea_hashes.map {|tea_hash| Tea.new(tea_hash)}
+    @teas = Tea.all
   end
 
   def show
-    tea_hash = Unirest.get("#{ENV['DOMAIN']}teas/#{params[:id]}.json").body
-    @tea = Tea.new(tea_hash)
+    @tea = Tea.find("#{params[:id]}")
   end
 
   def new
