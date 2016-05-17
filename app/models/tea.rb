@@ -14,13 +14,13 @@ class Tea
     tea = Unirest.delete("#{ENV['DOMAIN']}teas/#{@id}")
   end
 
-  def update(params)
-    tea = Unirest.patch("#{ENV['DOMAIN']}teas/#{params[:id]}.json", headers: {"Accept" => "application/json"}, parameters: {name: params[:name], origin: params[:origin], weight: params[:weight], in_stock: params[:in_stock]}).body
+  def update(params_hash)
+    Unirest.patch("#{ENV['DOMAIN']}teas/#{params_hash[:id]}.json", headers: {"Accept" => "application/json"}, parameters: params_hash).body
   end
 
-  def self.create(params)
+  def self.create(params_hash)
     # Unirest.post("#{ENV['DOMAIN']}/teas?name=#{params[:name]}&origin=#{params[:origin]}&weight=#{params[:weight]}&in_stock=#{params[:in_stock]}")
-    tea_hash = Unirest.post("#{ENV['DOMAIN']}teas.json", headers: {"Accept" => "application/json"}, parameters: {name: params[:name], origin: params[:origin], weight: params[:weight], in_stock: params[:in_stock]}).body
+    tea_hash = Unirest.post("#{ENV['DOMAIN']}teas.json", headers: {"Accept" => "application/json"}, parameters: params_hash).body
     return Tea.new(tea_hash)
   end
 

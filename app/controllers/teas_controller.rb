@@ -13,7 +13,7 @@ class TeasController < ApplicationController
   end
 
   def create
-    tea = Tea.create(params)
+    tea = Tea.create(name: params[:name], origin: params[:origin], weight: params[:weight], in_stock: params[:in_stock])
     redirect_to "/teas/#{tea.id}"
   end
 
@@ -22,7 +22,8 @@ class TeasController < ApplicationController
   end
 
   def update
-    tea = Tea.find(params[:id]).update(params)
+    tea = Tea.find(params[:id])
+    tea.update(name: params[:name], origin: params[:origin], weight: params[:weight], in_stock: params[:in_stock])
     redirect_to "/teas/#{tea.id}"
   end
 
