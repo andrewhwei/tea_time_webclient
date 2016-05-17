@@ -5,7 +5,7 @@ class TeasController < ApplicationController
   end
 
   def show
-    @tea = Tea.find("#{params[:id]}")
+    @tea = Tea.find(params[:id])
   end
 
   def new
@@ -13,23 +13,21 @@ class TeasController < ApplicationController
   end
 
   def create
-    # Unirest.post("#{ENV['DOMAIN']}/teas?name=#{params[:name]}&origin=#{params[:origin]}&weight=#{params[:weight]}&in_stock=#{params[:in_stock]}")
-    tea = Unirest.post("#{ENV['DOMAIN']}teas.json", headers: {"Accept" => "application/json"}, parameters: {name: params[:name], origin: params[:origin], weight: params[:weight], in_stock: params[:in_stock]}).body
-    redirect_to "/teas/#{tea['id']}"
+    tea = Tea.create(params)
+    redirect_to "/teas/#{tea.id}"
   end
 
   def edit
-    tea_hash = Unirest.get("#{ENV['DOMAIN']}teas/#{params[:id]}.json").body
-    @tea = Tea.new(tea_hash)
+    @tea = Tea.find(params[:id])
   end
 
   def update
-    tea = Unirest.patch("#{ENV['DOMAIN']}teas/#{params[:id]}.json", headers: {"Accept" => "application/json"}, parameters: {name: params[:name], origin: params[:origin], weight: params[:weight], in_stock: params[:in_stock]}).body
-    redirect_to "/teas/#{tea['id']}"
+    tea = Tea.find(params[:id]).update(params)
+    redirect_to "/teas/#{tea.id}"
   end
 
   def destroy
-    tea = Unirest.delete("#{ENV['DOMAIN']}teas/#{params[:id]}")
+    tea = Tea.find(params[:id]).delete
     redirect_to "/teas"
   end
 
