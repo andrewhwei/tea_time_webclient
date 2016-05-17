@@ -13,6 +13,7 @@ class TeasController < ApplicationController
   end
 
   def create
+    # Specify what params to pass, instead of passing whole params hash because user can enter in special parameters otherwise
     tea = Tea.create(name: params[:name], origin: params[:origin], weight: params[:weight], in_stock: params[:in_stock])
     redirect_to "/teas/#{tea.id}"
   end
