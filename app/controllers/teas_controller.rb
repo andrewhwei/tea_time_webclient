@@ -1,11 +1,13 @@
 class TeasController < ApplicationController
 
   def index
-    @teas = Unirest.get("#{ENV['DOMAIN']}teas.json").body
+    array_of_tea_hashes = Unirest.get("#{ENV['DOMAIN']}teas.json").body
+    @teas = array_of_tea_hashes.map {|tea_hash| Tea.new(tea_hash)}
   end
 
   def show
-    @tea = Unirest.get("#{ENV['DOMAIN']}teas/#{params[:id]}.json").body
+    tea_hash = Unirest.get("#{ENV['DOMAIN']}teas/#{params[:id]}.json").body
+    @tea = Tea.new(tea_hash)
   end
 
   def new
@@ -19,12 +21,12 @@ class TeasController < ApplicationController
   end
 
   def edit
-    @tea = Unirest.get("#{ENV['DOMAIN']}teas/#{params[:id]}.json").body
+    tea_hash = Unirest.get("#{ENV['DOMAIN']}teas/#{params[:id]}.json").body
+    @tea = Tea.new(tea_hash)
   end
 
   def update
     tea = Unirest.patch("#{ENV['DOMAIN']}teas/#{params[:id]}.json", headers: {"Accept" => "application/json"}, parameters: {name: params[:name], origin: params[:origin], weight: params[:weight], in_stock: params[:in_stock]}).body
-    puts tea
     redirect_to "/teas/#{tea['id']}"
   end
 

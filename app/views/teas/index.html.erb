@@ -9,10 +9,10 @@
 
 <% @teas.each do |tea| %>
   <tr>
-    <td><%= tea["name"] %></td>
-    <td><%= tea["origin"] %></td>
-    <td><%= tea["weight"] %></td>
-    <td><%= tea["in_stock"] %></td>
+    <td><%= tea.name %></td>
+    <td><%= tea.origin %></td>
+    <td><%= tea.weight %></td>
+    <td><%= tea.in_stock %></td>
   </tr>
 <% end %>
 

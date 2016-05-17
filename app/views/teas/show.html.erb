@@ -1,8 +1,8 @@
     <ul>
-      <li><%= @tea["name"] %></li>
-      <li><%= @tea["origin"] %></li>
-      <li><%= @tea["weight"] %></li>
-      <li><%= @tea["in_stock"] %></li>
+      <li><%= @tea.name %></li>
+      <li><%= @tea.origin %></li>
+      <li><%= @tea.weight %></li>
+      <li><%= @tea.in_stock %></li>
     </ul>
 
-    <%= link_to "Delete product", "/teas/#{@tea['id']}", method: :delete %>
+    <%= link_to "Delete product", "/teas/#{@tea.id}", method: :delete %>
