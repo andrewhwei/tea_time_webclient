@@ -11,26 +11,26 @@ class Tea
   end
 
   def delete
-    tea = Unirest.delete("#{ENV['DOMAIN']}teas/#{@id}", headers: {"Accept" => "application/json", "Authorization" => "Token token=#{ENV['TOKEN']}", "X-User-Email" => "#{ENV['EMAIL']}"})
+    tea = Unirest.delete("#{ENV['DOMAIN']}teas/#{@id}", headers: {"Accept" => "application/json", "Authorization" => "Token token=#{ENV['TOKEN']}", "X-User-Email" => ENV['EMAIL']})
   end
 
   def update(params_hash)
-    Unirest.patch("#{ENV['DOMAIN']}teas/#{params_hash[:id]}.json", headers: {"Accept" => "application/json", "Authorization" => "Token token=#{ENV['TOKEN']}", "X-User-Email" => "#{ENV['EMAIL']}"}, parameters: params_hash).body 
+    Unirest.patch("#{ENV['DOMAIN']}teas/#{params_hash[:id]}.json", headers: {"Accept" => "application/json", "Authorization" => "Token token=#{ENV['TOKEN']}", "X-User-Email" => ENV['EMAIL']}, parameters: params_hash).body 
   end
 
   def self.create(params_hash)
     # Unirest.post("#{ENV['DOMAIN']}/teas?name=#{params[:name]}&origin=#{params[:origin]}&weight=#{params[:weight]}&in_stock=#{params[:in_stock]}")
-    tea_hash = Unirest.post("#{ENV['DOMAIN']}teas.json", headers: {"Accept" => "application/json", "Authorization" => "Token token=#{ENV['TOKEN']}", "X-User-Email" => "#{ENV['EMAIL']}"}, parameters: params_hash).body
+    tea_hash = Unirest.post("#{ENV['DOMAIN']}teas.json", headers: {"Accept" => "application/json", "Authorization" => "Token token=#{ENV['TOKEN']}", "X-User-Email" => ENV['EMAIL']}, parameters: params_hash).body
     return Tea.new(tea_hash)
   end
 
   def self.find(id)
-    tea_hash = Unirest.get("#{ENV['DOMAIN']}teas/#{id}.json", headers: {"Accept" => "application/json", "Authorization" => "Token token=#{ENV['TOKEN']}", "X-User-Email" => "#{ENV['EMAIL']}"}).body
+    tea_hash = Unirest.get("#{ENV['DOMAIN']}teas/#{id}.json", headers: {"Accept" => "application/json", "Authorization" => "Token token=#{ENV['TOKEN']}", "X-User-Email" => ENV['EMAIL']}).body
     return Tea.new(tea_hash)
   end
 
   def self.all
-    array_of_tea_hashes = Unirest.get("#{ENV['DOMAIN']}teas.json", headers: {"Accept" => "application/json", "Authorization" => "Token token=#{ENV['TOKEN']}", "X-User-Email" => "#{ENV['EMAIL']}"}).body
+    array_of_tea_hashes = Unirest.get("#{ENV['DOMAIN']}teas.json", headers: {"Accept" => "application/json", "Authorization" => "Token token=#{ENV['TOKEN']}", "X-User-Email" => ENV['EMAIL']}).body
     return array_of_tea_hashes.map {|tea_hash| Tea.new(tea_hash)}
   end
 
